@@ -1,6 +1,15 @@
 
 public class stutterprimes{
-	
+	public class Counter{
+		int currentCount;
+		public Counter(int startingnum){
+			currentCount = startingnum;
+		}
+		public int increment(){
+			currentCount += 1;
+			return (currentCount);
+		}
+	}
 	// methods are all executed from main
 	public static void main(String args[]){
 		computePrimes(47);
