@@ -47,7 +47,7 @@ public class PhoneNumber{
     // 4th constructor:
     // handles objects initialized with area code, number, and type arguments
     public PhoneNumber(int acode, int num, char type){
-		this.countryCode = 43;
+	this.countryCode = 43;
         this.areaCode = acode;
         this.number  = num;
         this.type = type;
@@ -69,11 +69,11 @@ public class PhoneNumber{
 
     // sets the year of the phone
     public void setYear(int yr)         {this.year = yr;}
-	////////////////////
+    ////////////////////
 
 
     // - - - Getter methods - - - //
-	// returns the country code
+    // returns the country code
     public int getCountry()             {return this.countryCode;}
 
     // returns the area code
@@ -85,29 +85,30 @@ public class PhoneNumber{
     // returns the type of phone line it is
     public char getType()               {return this.type;}
 
-	// returns the year of the phone
+    // returns the year of the phone
     public int getYear()                {return this.year;}
-	////////////////////
+    ////////////////////
 
 
     // returns true if duplicate digits, includes a message through a print statement
     public boolean doubleDigits(){
-		String strnum = String.valueOf(number);
-		boolean decision = false;
-		for (int i = 0; i < 7; i++){
-			for (int j = i+1; j < 7; j++){
-				if (strnum.charAt(i) == strnum.charAt(j)){
-					decision = true;
-				}
+	String strnum = String.valueOf(number);
+	boolean decision = false;
+	for (int i = 0; i < 7; i++){
+		for (int j = i+1; j < 7; j++){
+			if (strnum.charAt(i) == strnum.charAt(j)){
+				decision = true;
 			}
 		}
-		if (decision){
-			System.out.println("This phone number contains duplicate digits!");
-		}
-		else{
-			System.out.println("This phone number does not contain duplicate digits!");
-		}
-		return decision;
+	}
+	if (decision){
+		System.out.println("This phone number contains duplicate digits!");
+	}
+	else{
+		System.out.println("This phone number does not contain duplicate digits!");
+	}
+	return decision;
+    	
     }
 
     // prints just number and area code itself, returns nothing
@@ -162,6 +163,5 @@ public class PhoneNumber{
 	newPhone.printNumber();
 	newPhone.printPhoneNumberStats();
 	newPhone.doubleDigits();
-		
     }
 }
