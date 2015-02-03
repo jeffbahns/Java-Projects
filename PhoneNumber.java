@@ -1,3 +1,6 @@
+// Author : Jeff Bahns
+// Assignment 2
+
 import java.util.Scanner;
 
 public class PhoneNumber{
@@ -87,7 +90,7 @@ public class PhoneNumber{
 	////////////////////
 
 
-    // returns true if duplicate digits
+    // returns true if duplicate digits, includes a message through a print statement
     public boolean doubleDigits(){
 		String strnum = String.valueOf(number);
 		boolean decision = false;
@@ -99,10 +102,10 @@ public class PhoneNumber{
 			}
 		}
 		if (decision){
-			System.out.println("HELL YEAH");
+			System.out.println("This phone number contains duplicate digits!");
 		}
 		else{
-			System.out.println("HELL NO");
+			System.out.println("This phone number does not contain duplicate digits!");
 		}
 		return decision;
     }
@@ -114,6 +117,7 @@ public class PhoneNumber{
     	strnum += String.valueOf(number).substring(0,3) + "-" + String.valueOf(number).substring(3,7);
     	System.out.println(strnum);
     }
+
     // prints all number stats about the phonenumber, returns nothing
     public void printPhoneNumberStats(){
     	System.out.println("__________________________________");
@@ -132,8 +136,14 @@ public class PhoneNumber{
     	System.out.println("__________________________________");
     }
 
+    // main drives the program, asks the user for input, and creates the object
     public static void main(String[]args){
+
+    	// creates scanner object, to take input
     	Scanner s = new Scanner(System.in);
+
+    	// these are a series of print statements asking for input,
+    	// and scanner reads that store the user input
     	System.out.println("Enter Country Code:");
     	int cc = s.nextInt();
 		System.out.println("Enter Area Code:");
@@ -145,11 +155,13 @@ public class PhoneNumber{
 		char type = typ.charAt(0);
 		System.out.println("Enter Year:");
 		int yr = s.nextInt();
-
-		PhoneNumber jeff = new PhoneNumber(cc, ac, pnum, type, yr);
-		jeff.printNumber();
-		jeff.printPhoneNumberStats();
-		jeff.doubleDigits();
+	
+		// once all necessary input is collected, it creates an object with given traits
+		// and preforms different methods of that object
+		PhoneNumber newPhone = new PhoneNumber(cc, ac, pnum, type, yr);
+		newPhone.printNumber();
+		newPhone.printPhoneNumberStats();
+		newPhone.doubleDigits();
 		
     }
 }
