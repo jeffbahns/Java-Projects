@@ -3,6 +3,8 @@
 
 import java.util.Scanner;
 
+// PhoneNumber class, which stores info about a number,
+// and can preform various get/set methods upon it.
 public class PhoneNumber{
     
     // Country code
@@ -20,12 +22,12 @@ public class PhoneNumber{
     // The year 
     private int year = 1981;
 
-	// - - - Constructors - - - //
-	// default constructor:
-	// handles objects initialized with no arguments
+    // - - - Constructors - - - //
+    // default constructor:
+    // handles objects initialized with no arguments
     public PhoneNumber(){}
 	
-	// 2nd consctructor - handles objects initalized with maximum arguments
+    // 2nd consctructor - handles objects initalized with maximum arguments
     public PhoneNumber(int ccode, int acode, int num, char type, int year){
         this.countryCode = ccode;
         this.areaCode = acode;
@@ -108,7 +110,6 @@ public class PhoneNumber{
 		System.out.println("This phone number does not contain duplicate digits!");
 	}
 	return decision;
-    	
     }
 
     // prints just number and area code itself, returns nothing
