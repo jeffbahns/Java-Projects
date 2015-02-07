@@ -3,8 +3,6 @@
 
 
 
-// PhoneNumber class, which stores info about a number,
-// and can preform various get/set methods upon it.
 public class PhoneNumber{
     
     // Country code
@@ -22,12 +20,12 @@ public class PhoneNumber{
     // The year 
     private int year = 1981;
 
-    // - - - Constructors - - - //
-    // default constructor:
-    // handles objects initialized with no arguments
+	// - - - Constructors - - - //
+	// default constructor:
+	// handles objects initialized with no arguments
     public PhoneNumber(){}
 	
-    // 2nd consctructor - handles objects initalized with maximum arguments
+	// 2nd consctructor - handles objects initalized with maximum arguments
     public PhoneNumber(int ccode, int acode, int num, char type, int year){
         this.countryCode = ccode;
         this.areaCode = acode;
@@ -49,7 +47,7 @@ public class PhoneNumber{
     // 4th constructor:
     // handles objects initialized with area code, number, and type arguments
     public PhoneNumber(int acode, int num, char type){
-	this.countryCode = 43;
+		this.countryCode = 43;
         this.areaCode = acode;
         this.number  = num;
         this.type = type;
@@ -71,11 +69,11 @@ public class PhoneNumber{
 
     // sets the year of the phone
     public void setYear(int yr)         {this.year = yr;}
-    ////////////////////
+	////////////////////
 
 
     // - - - Getter methods - - - //
-    // returns the country code
+	// returns the country code
     public int getCountry()             {return this.countryCode;}
 
     // returns the area code
@@ -87,36 +85,27 @@ public class PhoneNumber{
     // returns the type of phone line it is
     public char getType()               {return this.type;}
 
-    // returns the year of the phone
+	// returns the year of the phone
     public int getYear()                {return this.year;}
-    ////////////////////
+	////////////////////
 
 
     // returns true if duplicate digits, includes a message through a print statement
     public boolean doubleDigits(){
-<<<<<<< Updated upstream
-	String strnum = String.valueOf(number);
-	boolean decision = false;
-	for (int i = 0; i < 7; i++){
-		for (int j = i+1; j < 7; j++){
-			if (strnum.charAt(i) == strnum.charAt(j)){
-=======
 		String strnum = String.valueOf(number);
 		boolean decision = false;
-		for (int i = 0; i < 7; i++){
+		for (int i = 0; i < 6; i++){
 			if (strnum.charAt(i) == strnum.charAt(i+1)){
->>>>>>> Stashed changes
 				decision = true;
 			}
 		}
-	}
-	if (decision){
-		System.out.println("This phone number contains duplicate digits!");
-	}
-	else{
-		System.out.println("This phone number does not contain duplicate digits!");
-	}
-	return decision;
+		if (decision){
+			System.out.println("This phone number contains duplicate digits!");
+		}
+		else{
+			System.out.println("This phone number does not contain duplicate digits!");
+		}
+		return decision;
     }
 
     // prints just number and area code itself, returns nothing
@@ -144,37 +133,4 @@ public class PhoneNumber{
     	System.out.println(year);
     	System.out.println("__________________________________");
     }
-
-<<<<<<< Updated upstream
-    // main drives the program, asks the user for input, and creates the object
-    public static void main(String[]args){
-
-    	// creates scanner object, to take input
-    	Scanner s = new Scanner(System.in);
-
-    	// these are a series of print statements asking for input,
-    	// and scanner reads that store the user input
-    	System.out.println("Enter Country Code:");
-    	int cc = s.nextInt();
-	System.out.println("Enter Area Code:");
-	int ac = s.nextInt();
-	System.out.println("Enter Phone Number:");
-	int pnum = s.nextInt();
-	System.out.println("Enter Type (H, C, or B):");
-	String typ = s.next();
-	char type = typ.charAt(0);
-	System.out.println("Enter Year:");
-	int yr = s.nextInt();
-	
-	// once all necessary input is collected, it creates an object with given traits
-	// and preforms different methods of that object
-	PhoneNumber newPhone = new PhoneNumber(cc, ac, pnum, type, yr);
-	newPhone.printNumber();
-	newPhone.printPhoneNumberStats();
-	newPhone.doubleDigits();
-    }
-=======
-    
-    
->>>>>>> Stashed changes
 }
