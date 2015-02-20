@@ -26,7 +26,6 @@ class Main{
 		// once all necessary input is collected, it creates an object with given traits
 		// using one of the 4 constructors that fits its' needs
 		// and preforms different methods of that object
-		
 		if (cc != 0 && ac != 0 && pnum != 0 && type != '0' && yr != 0){
 			PhoneNumber newPhone = new PhoneNumber(cc, ac, pnum, type, yr);
 			newPhone.printNumber();

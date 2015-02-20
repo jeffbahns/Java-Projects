@@ -1,5 +1,12 @@
-
 public class stutterprimes{
+
+	// methods are all executed from main
+	public static void main(String args[]){
+		computePrimes(47);
+		isPrime(47);
+		printStutter(47);
+	}
+	
 	public class Counter{
 		int currentCount;
 		public Counter(int startingnum){
@@ -9,12 +16,6 @@ public class stutterprimes{
 			currentCount += 1;
 			return (currentCount);
 		}
-	}
-	// methods are all executed from main
-	public static void main(String args[]){
-		computePrimes(47);
-		isPrime(47);
-		printStutter(47);
 	}
 	
 	// computes/prints every prime between 2 and n
