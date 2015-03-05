@@ -1,3 +1,4 @@
+
 // standard doubly linked list with some bells and whistles
 public class DoublyLinkedList{
 	

@@ -1,5 +1,11 @@
+
+
+// Written by : Jeff Bahns
+
 import java.util.Scanner;
 
+// overall class 'assignment3' is used only as a housing
+// for all the subclasses and methods
 public class assignment3 {
 	
 	// standard node class
@@ -78,14 +84,17 @@ public class assignment3 {
 			tail = tail.prev;
 			decrement();
 		}
-		
+
 		// prints out the entirety of the linked list
-		public void printStr(){
+		// in string format
+		public void printListStr(){
 			Node current = head;
+			String state = "";
 			while (current != null){
-				System.out.println(current.data);
+				state += Integer.toString(current.data);
 				current = current.next;
 			}
+			System.out.println(state);
 		}
 	}
 	
@@ -100,11 +109,20 @@ public class assignment3 {
 		System.out.println("Input second number");
 		String in2 = s.next();
 
+		// takes two inputs and turns them into linked lists
+		// using convert method
 		DoublyLinkedList num1 = convertToList(in1);
 		DoublyLinkedList num2 = convertToList(in2);
 		System.out.println("___________");
-		listSum(num1,num2);
+		
+		// calls sum method which takes sum
+		// of my two previously referenced linked lists
+		DoublyLinkedList result = listSum(num1,num2);
+		
+		System.out.println("The sum of the two integers is:");
+		result.printListStr();
 	}
+
 	// method that converts a [string] number into a linked list of ints
 	public static DoublyLinkedList convertToList(String n){
 			
@@ -173,8 +191,7 @@ public class assignment3 {
 
 			result.insertHead(sum);
 		}
-
-		result.printStr();
-		return a;
+		return result;
 	}
+
 }
