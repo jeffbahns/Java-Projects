@@ -76,7 +76,7 @@ class Deque{
 	public void printDeque(){
 		Node current = front;
 		while (current != null){
-			System.out.println(current.price);
+			System.out.println("$" + String.valueOf(current.price) + " " + String.valueOf(current.amount) + " shares.");
 			current = current.next;
 		}
 		System.out.println("-------");

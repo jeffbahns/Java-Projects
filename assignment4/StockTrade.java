@@ -7,7 +7,8 @@ class StockTrade {
 
 		Scanner s = new Scanner(System.in);
 		String trade = "";
-
+		System.out.println("Enter trades in the form:");
+		System.out.println("B/S price shares");
 		//while (!trade.equals("done")){
 		for (int i = 0; i < 3; i++){
 			trade = s.nextLine();
@@ -33,11 +34,72 @@ class StockTrade {
 	}
 
 	public static Deque sellStock(int sellPrice, int sellAmount, Deque stocks){
-		System.out.println("WE ARE SELLING!");
-		//int priceDiff = sellPrice - stocks.back.price;
-		int profitloss = sellPrice * sellAmount;
-		String sellResult = "Sell " + sellAmount + " shares at $" + sellPrice + " each.";
+		int totalSale = sellPrice * sellAmount;
+		int sellLimit = sellAmount;
+		int origSale = 0;
 
+		while (sellLimit > 0){
+
+			stocks.back.amount -= sellLimit;
+			if (stocks.back.amount < 0){
+				sellLimit = Math.abs(stocks.back.amount);
+				//sellAmount += stocks.back.amount;
+				stocks.back.amount += Math.abs(stocks.back.amount);
+			}
+			else{
+				sellLimit -= sellAmount;
+			}
+
+			origSale += sellAmount * stocks.back.price;
+			//totalSale += sellAmount * sellPrice;
+			if (stocks.back.amount == 0)
+				stocks.dequeueBack();
+		}
+
+		String sellResult = "Sell " + sellAmount + " shares at $" + sellPrice + " each.";
+		System.out.println(sellResult);
+		System.out.println("TOTAL SALE: $" + totalSale);
+		System.out.println("ORIG SALE : $" + origSale);
+		if (origSale > totalSale)
+			System.out.println("Loss   : $" + Integer.valueOf(origSale - totalSale));
+		else if (totalSale < origSale)
+			System.out.println("Profit : $" + Integer.valueOf(totalSale - origSale));
+		else
+			System.out.println("You neither gained nor lost");
+
+
+	/*	~~ General Algorithm ~~
+
+		int total = 0;
+		int sellLimit = sellAmount
+
+		*keep running until sellLimit = 0
+		while sellLimit not reached
+
+			*take as much as needed from stocks.back.amount without going over
+			stocks.back.amount -= sellAmount
+			
+			if (stocks.back.amount < 0){
+				sellLimit = abs(stocks.back.amount)
+				sellAmount += stocks.back.amount
+				stocks.back.amount += Math.abs(stocks.back.amount)
+			}
+			else{
+				sellLimit -= sellAmount
+			}
+
+		
+			total += sellAmount * stocks.back.price
+
+
+			if (stocks.back.price == 0)
+				stocks.dequeueBack
+	*/
+
+
+
+		
+		
 		return stocks;
 	}
 
