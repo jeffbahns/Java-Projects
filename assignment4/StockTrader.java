@@ -1,70 +1,78 @@
 
+
 import java.util.Scanner;
 // stocktrade class encompasses all methods and subclasses
 class StockTrader{
 
-	// main controls program flow and all function handling
+   /*
+   	* method main controls program flow
+	*
+	* intro 
+	* stocks		deque object where all stocks are stored
+	* scan			scan object that grabs keyboard input
+	* trade			string where scans are stored
+	* parts			string array where each parsed input it stored
+	* buysell		char which is either 'B' or 'S'
+	* amount		contains amount of shares desired to buy/sell
+	* price			contains buying/selling price
+   	*/
 	public static void main(String[]args){
-		System.out.println("___________________________________");
 		Deque stocks = new Deque();
-
-		Scanner s = new Scanner(System.in);
-		String trade = "";
-		System.out.println("Enter trades in the form:");
-		System.out.println("B/S shares price");
-		System.out.println("EXAMPLE : 'B 150 20'");
-		System.out.println("(Enter : 'D 0 0' to exit)");
-		
-		while (!trade.equals("done")){
-		//while (!trade.equals("")){
+		Scanner scan = new Scanner(System.in);
+		String trade = " ";
+		String intro = "_____________________________________\n"
+					 + "| Enter trades in the form:          |\n"
+					 + "| B/S shares price:                  |\n"
+					 + "| EXAMPLE : 'B 150 20' OR 'S 10 5'   |\n"
+					 + "| (To exit program, press return)    |\n"
+					 + "|____________________________________|";
+		System.out.println(intro);
+		// while loop runs until scanner receives nothing
+		// aka, return key is pressed after no input
+		while (!trade.equals("")){
 			System.out.print(">>  ");
-			trade = s.nextLine();
-			String[] parts = trade.split(" ");
+			trade = scan.nextLine();
 
-			// line is parsed into three variables
-			char buysell = parts[0].charAt(0);
-			int amount = Integer.parseInt(parts[1]);
-			int price = Integer.parseInt(parts[2]);
-
-			// char buysell determines whether or not
-			// to call buy or sell function
-			if (buysell == 'B')
-				stocks = buyStock(amount, price, stocks);
-			else if (buysell == 'S')
-				stocks = sellStock(amount, price, stocks);
+			if (!trade.equals("")){
+				String[] parts = trade.split(" ");
+				char buysell = parts[0].charAt(0);
+				int amount = Integer.parseInt(parts[1]);
+				int price = Integer.parseInt(parts[2]);
+				
+				if (buysell == 'B')
+					stocks = buyStock(amount, price, stocks);
+				else if (buysell == 'S')
+					stocks = sellStock(amount, price, stocks);
+			}
 		}
-		stocks.printDeque();
 	}
 
-	// buys a new stock at specified amount and price
+   /*
+   	* method buyStock buys a new stock at specified amount and price
+	*/
 	public static Deque buyStock(int amount, int price, Deque stocks){
 		stocks.enqueueFront(price, amount);
 		String buyResult = "Buy " + amount + " shares at $" + price + " each.";
 		System.out.println(buyResult);
+		System.out.println("-----------------");
 		return stocks;
 	}
 
-	// sells a specified amount of stocks at price
+   /* 
+   	* method sellStock sells a specified amount of stocks at price
+   	*
+	* sellLimit 	limits the loop from taking more shares than it requires
+	* totalSale 	how much money will be made from the sale
+	* origSale		keeps track of what the shares were originally purchased at
+	* capitalGain	contains the difference of totalSale-origSale
+	* saleMade		boolean that decides whether a sale occurred
+	*/
 	public static Deque sellStock(int sellAmount, int sellPrice, Deque stocks){
 		
-		// sellLimit limits the loop from taking more shares
-		// than it requires
 		int sellLimit = sellAmount;
-
-		// totalSale is how much money will be made from
-		// the sale, whether there were gains or losses
 		int totalSale = sellAmount * sellPrice;
-
-		// origSale keeps track of what the 
-		// stock were originally purchased for
 		int origSale = 0;
-
-		// capitalGain ends up being the difference
-		// of totalSale - origSale
 		int capitalGain = 0;
-
-		// a simple boolean variable which tells whether
-		// or not a sale was made or if not enough stocks
 		boolean saleMade = true;
 		
 		// if no stocks are left, nothing is done
@@ -119,29 +127,41 @@ class StockTrader{
 			else
 				System.out.println("No profit or loss occurred");
 		}
-
+		System.out.println("-----------------");
 		return stocks;
 	}
 
-	// straightforward deque
+   /* 
+   	*linked list implementation of a deque
+   	*
+   	* front 		node that is at front of deque
+   	* back			node that is at back of deque
+   	*
+   	* Deque			single class constructor, creates empty deque
+   	* isEmpty		return true if deque empty
+   	* peekFront		returns front of deque
+   	* peekBack		returns back of deque
+   	* enqueueFront	enqueues new node to the front
+   	* enqueueBack	enqueues new node to the back
+   	* dequeueFront	dequeues node from the front
+   	* dequeueBack	dequeues node from the back
+   	* printDeque	prints a formatted version of the deque
+   	* totalStocks	returns total share amount of the entire deque
+	*/
 	static class Deque{
 
-		// three member variables
 		public Node front;
 		public Node back;
 		
-		// constructor which creates an empty deque
 		public Deque(){
 			front = null;
 			back = null;
 		}
 		
-		// returns true if deque empty
 		public boolean isEmpty(){
 			return (front == null);
 		}
 
-		// returns front of deque if existent
 		public Node peekFront(){
 			if (front == null){
 				return null;
@@ -149,7 +169,6 @@ class StockTrader{
 			return front;
 		}
 
-		// returns back of deque if existent
 		public Node peekBack(){
 			if (back == null){
 				return null;
@@ -157,7 +176,6 @@ class StockTrader{
 			return back;
 		}
 
-		// enqueues new node to the front of deque
 		public void enqueueFront(int price, int amount){
 			Node newTrade = new Node(price, amount);
 			newTrade.next = front;
@@ -168,7 +186,6 @@ class StockTrader{
 			front = newTrade;
 		}
 		
-		// enqueues new node to the back of deque
 		public void enqueueBack(int price, int amount){
 			Node newTrade = new Node(price, amount);
 			newTrade.prev = back;
@@ -179,7 +196,6 @@ class StockTrader{
 			back = newTrade;
 		}
 
-		// dequeues node from the front of deque
 		public void dequeueFront(){
 			if (isEmpty())
 				System.out.println("This deque is empty");
@@ -192,7 +208,6 @@ class StockTrader{
 			}
 		}
 
-		// dequeues node from the back of deque
 		public void dequeueBack(){
 			if (isEmpty())
 				System.out.println("This deque is empty");
@@ -205,9 +220,6 @@ class StockTrader{
 			}
 		}
 
-		// prints a formatted version of the deque
-		// showing the stocks on the deque 
-		// including share amounts and prices
 		public void printDeque(){
 			Node current = front;
 			System.out.println("________________________");
@@ -225,7 +237,6 @@ class StockTrader{
 			System.out.println("________________________");
 		}
 		
-		// returns total share amount of the entire deque
 		public int totalStocks(){
 			int total = 0;
 			Node current = front;
@@ -237,7 +248,16 @@ class StockTrader{
 		}
 	}
 
-	// modified node which contains two elements
+   /*
+   	* node modified to be stock related
+   	*
+   	* price			element that contains price of a stock
+   	* amount		element that contains amount of shares held
+   	* prev			contains previous node
+   	* next			contains next node
+   	*
+   	* Node			constructor, creates new node but requires price, amount
+   	*/
 	static class Node{
 		
 		int price;
