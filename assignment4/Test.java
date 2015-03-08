@@ -1,4 +1,4 @@
-class Test {
+class Test {c
 	
 	public static void main(String[]args){
 

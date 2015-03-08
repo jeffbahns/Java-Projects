@@ -1,3 +1,4 @@
+// straightforward deque
 class Deque{
 
 	// three member variables
@@ -11,9 +12,12 @@ class Deque{
 		back = null;
 	}
 	
+	// returns true if deque empty
 	public boolean isEmpty(){
 		return (front == null);
 	}
+
+	// returns front of deque if existent
 	public Node peekFront(){
 		if (front == null){
 			return null;
@@ -21,6 +25,7 @@ class Deque{
 		return front;
 	}
 
+	// returns back of deque if existent
 	public Node peekBack(){
 		if (back == null){
 			return null;
@@ -28,6 +33,7 @@ class Deque{
 		return back;
 	}
 
+	// enqueues new node to the front of deque
 	public void enqueueFront(int price, int amount){
 		Node newTrade = new Node(price, amount);
 		newTrade.next = front;
@@ -39,6 +45,7 @@ class Deque{
 
 	}
 	
+	// enqueues new node to the back of deque
 	public void enqueueBack(int price, int amount){
 		Node newTrade = new Node(price, amount);
 		newTrade.prev = back;
@@ -49,6 +56,7 @@ class Deque{
 		back = newTrade;
 	}
 
+	// dequeues node from the front of deque
 	public void dequeueFront(){
 		if (isEmpty())
 			System.out.println("This deque is empty");
@@ -61,6 +69,7 @@ class Deque{
 		}
 	}
 
+	// dequeues node from the back of deque
 	public void dequeueBack(){
 		if (isEmpty())
 			System.out.println("This deque is empty");
@@ -73,12 +82,23 @@ class Deque{
 		}
 	}
 
+	// prints a formatted version of the deque
+	// showing the stocks on the deque 
+	// including share amounts and prices
 	public void printDeque(){
 		Node current = front;
-		while (current != null){
-			System.out.println("$" + String.valueOf(current.price) + " " + String.valueOf(current.amount) + " shares.");
-			current = current.next;
+		System.out.println("________________________");
+		if (isEmpty()){
+			System.out.println("No Stocks remain");
 		}
-		System.out.println("-------");
+		else{
+			System.out.println("--- Remaining stocks ---");
+
+			while (current != null){
+				System.out.println("$" + String.valueOf(current.price) + " " + String.valueOf(current.amount) + " shares.");
+				current = current.next;
+			}
+		}
+		System.out.println("________________________");
 	}
 }
