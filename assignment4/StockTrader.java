@@ -1,4 +1,6 @@
 
+// jeff bahns
+// assignment 4
 
 import java.util.Scanner;
 // stocktrade class encompasses all methods and subclasses
@@ -89,7 +91,6 @@ class StockTrader{
 			totalSale = sellLimit * sellPrice;
 			sellAmount = sellLimit;
 		}
-
 		// while there are still shares to be sold, this loop runs
 		while (sellLimit > 0){
 
@@ -101,8 +102,7 @@ class StockTrader{
 				stocks.back.amount -= sellLimit;
 				sellLimit = Math.abs(stocks.back.amount);
 				stocks.dequeueBack();
-			}
-			
+			}		
 			// if there are sufficient stocks in the back
 			// then they are taken and everything is OK
 			else{
@@ -111,7 +111,6 @@ class StockTrader{
 				sellLimit = 0;
 			}
 		}
-
 		// if a sale actually occurred,
 		// goes through if else to format a print statement
 		// for a profit, loss, or an even break
