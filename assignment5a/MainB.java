@@ -1,27 +1,21 @@
 import java.util.Scanner;
-class Main {
+class MainB {
 
 	public static void main(String[]args) {
 		Scanner s = new Scanner(System.in);
 		String inputExpression = "";
 		while (!inputExpression.equals(" ")){
-			inputExpression = s.nextLine();
-			BinaryTree tree = binaryInfixTreeBuilder(inputExpression);
-			tree.inOrder(null);
-			System.out.println(tree.infixString);
+			inputExpression=" ";
 		}
 		System.out.println(" ".equals(" "));
-		
-
 	}
 
-	// takes a infix expression string as input
-	// returns a binary tree that corresponds to original expression
-	public static BinaryTree binaryInfixTreeBuilder(String infixStr) {
-		
+	public void diff(String infixStr){
+
 		BinaryTree infixTree = new BinaryTree(' ');
 		for (int i = 0; i < infixStr.length(); i++){
 			char token = infixStr.charAt(i);
+
 			if (infixTree.focusNode == null)
 				infixTree.focusNode = infixTree.root;
 
@@ -48,7 +42,6 @@ class Main {
 			else if (token == ' '){
 			}
 		}
-		return infixTree;
 	}
-
+	
 }
