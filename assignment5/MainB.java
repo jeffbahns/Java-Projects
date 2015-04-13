@@ -69,11 +69,42 @@ class MainB {
 		else if (current.data == '+'){
 			BinaryTree left = new BinaryTree(current.childL.data, current.childL.childL, current.childL.childR);
 			BinaryTree right = new BinaryTree(current.childR.data, current.childR.childL, current.childR.childR);
-			return diff(left) + "+" + diff(right);
+			return "(" + diff(left) + " + " + diff(right) + ")";
 		}
 
-		
+		else if (current.data == '-'){
+			BinaryTree left = new BinaryTree(current.childL.data, current.childL.childL, current.childL.childR);
+			BinaryTree right = new BinaryTree(current.childR.data, current.childR.childL, current.childR.childR);
+			return diff(left) + " - " + diff(right);
+		}
 
+		else if (current.data == '*'){
+			BinaryTree left = new BinaryTree(current.childL.data, current.childL.childL, current.childL.childR);
+			BinaryTree right = new BinaryTree(current.childR.data, current.childR.childL, current.childR.childR);
+			left.inOrder(null);
+			right.inOrder(null);
+			char leftS = left.root.data;
+			char rightS = right.root.data;
+			String leftI = left.infixString;
+			String rightI = right.infixString;
+			return "(" + leftI + "*" + diff(right) + ") + (" + diff(left) + "*" + rightI + ")"; 
+		}
+
+		else if (current.data == '/'){
+			BinaryTree left = new BinaryTree(current.childL.data, current.childL.childL, current.childL.childR);
+			BinaryTree right = new BinaryTree(current.childR.data, current.childR.childL, current.childR.childR);
+			char leftS = left.root.data;
+			char rightS = right.root.data;
+			return "((" + rightS + "*" + diff(left) + ") - (" + leftS + "*" + diff(right) + ")) / (" + rightS + "^2)";
+		}
+
+		else if (current.data == '^'){
+			BinaryTree left = new BinaryTree(current.childL.data, current.childL.childL, current.childL.childR);
+			BinaryTree right = new BinaryTree(current.childR.data, current.childR.childL, current.childR.childR);
+			char leftS = left.root.data;
+			char rightS = right.root.data;
+			return rightS + "* (" + leftS + " ^ (" + rightS + " - 1)) * " + diff(left);
+		}
 		return "";
 	}
 
