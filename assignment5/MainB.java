@@ -83,26 +83,28 @@ class MainB {
 			BinaryTree right = new BinaryTree(current.childR.data, current.childR.childL, current.childR.childR);
 			left.inOrder(null);
 			right.inOrder(null);
-			char leftS = left.root.data;
-			char rightS = right.root.data;
-			String leftI = left.infixString;
-			String rightI = right.infixString;
-			return "(" + leftI + "*" + diff(right) + ") + (" + diff(left) + "*" + rightI + ")"; 
+			String leftS = left.infixString;
+			String rightS = right.infixString;
+			return "((" + leftS + "*" + diff(right) + ") + (" + diff(left) + "*" + rightS + "))"; 
 		}
 
 		else if (current.data == '/'){
 			BinaryTree left = new BinaryTree(current.childL.data, current.childL.childL, current.childL.childR);
 			BinaryTree right = new BinaryTree(current.childR.data, current.childR.childL, current.childR.childR);
-			char leftS = left.root.data;
-			char rightS = right.root.data;
+			left.inOrder(null);
+			right.inOrder(null);
+			String leftS = left.infixString;
+			String rightS = right.infixString;
 			return "((" + rightS + "*" + diff(left) + ") - (" + leftS + "*" + diff(right) + ")) / (" + rightS + "^2)";
 		}
 
 		else if (current.data == '^'){
 			BinaryTree left = new BinaryTree(current.childL.data, current.childL.childL, current.childL.childR);
 			BinaryTree right = new BinaryTree(current.childR.data, current.childR.childL, current.childR.childR);
-			char leftS = left.root.data;
-			char rightS = right.root.data;
+			left.inOrder(null);
+			right.inOrder(null);
+			String leftS = left.infixString;
+			String rightS = right.infixString;
 			return rightS + "* (" + leftS + " ^ (" + rightS + " - 1)) * " + diff(left);
 		}
 		return "";
