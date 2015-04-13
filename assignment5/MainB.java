@@ -1,6 +1,6 @@
 import java.util.Scanner;
 class MainB {
-
+	
 	public static void main(String[]args) {
 		Scanner s = new Scanner(System.in);
 		String inputExpression = "";
@@ -17,7 +17,7 @@ class MainB {
 	// takes a infix expression string as input
 	// returns a binary tree that corresponds to original expression
 	public static BinaryTree binaryInfixTreeBuilder(String infixStr) {
-		
+
 		BinaryTree infixTree = new BinaryTree(' ', null, null);
 		for (int i = 0; i < infixStr.length(); i++){
 			char token = infixStr.charAt(i);
@@ -57,56 +57,34 @@ class MainB {
 		if (current.data == ' ')
 			current = current.childL;
 
-		// base cases, if root = constant or = 'x'
 		if (current.isLeaf() && Character.toLowerCase(current.data) != 'x')
 			return "0";
 
 		else if (current.isLeaf() && Character.toLowerCase(current.data) == 'x')
 			return "1";
 		
-		// if '+', creates two trees from each of the children
-		// these trees are each differentiated and added together
-		else if (current.data == '+'){
-			BinaryTree left = new BinaryTree(current.childL.data, current.childL.childL, current.childL.childR);
-			BinaryTree right = new BinaryTree(current.childR.data, current.childR.childL, current.childR.childR);
+		BinaryTree left = new BinaryTree(current.childL.data, current.childL.childL, current.childL.childR);
+		BinaryTree right = new BinaryTree(current.childR.data, current.childR.childL, current.childR.childR);
+		left.inOrder(null);
+		right.inOrder(null);	
+		String leftS = left.infixString;
+		String rightS = right.infixString;
+
+		if (current.data == '+')
 			return "(" + diff(left) + " + " + diff(right) + ")";
-		}
 
-		else if (current.data == '-'){
-			BinaryTree left = new BinaryTree(current.childL.data, current.childL.childL, current.childL.childR);
-			BinaryTree right = new BinaryTree(current.childR.data, current.childR.childL, current.childR.childR);
+		else if (current.data == '-')
 			return diff(left) + " - " + diff(right);
-		}
 
-		else if (current.data == '*'){
-			BinaryTree left = new BinaryTree(current.childL.data, current.childL.childL, current.childL.childR);
-			BinaryTree right = new BinaryTree(current.childR.data, current.childR.childL, current.childR.childR);
-			left.inOrder(null);
-			right.inOrder(null);
-			String leftS = left.infixString;
-			String rightS = right.infixString;
-			return "((" + leftS + "*" + diff(right) + ") + (" + diff(left) + "*" + rightS + "))"; 
-		}
+		else if (current.data == '*')
+			return "((" + leftS + " * " + diff(right) + ") + (" + diff(left) + " * " + rightS + ")"; 
 
-		else if (current.data == '/'){
-			BinaryTree left = new BinaryTree(current.childL.data, current.childL.childL, current.childL.childR);
-			BinaryTree right = new BinaryTree(current.childR.data, current.childR.childL, current.childR.childR);
-			left.inOrder(null);
-			right.inOrder(null);
-			String leftS = left.infixString;
-			String rightS = right.infixString;
-			return "((" + rightS + "*" + diff(left) + ") - (" + leftS + "*" + diff(right) + ")) / (" + rightS + "^2)";
-		}
+		else if (current.data == '/')
+			return "( ( " + rightS + " * " + diff(left) + ") - (" + leftS + " * " + diff(right) + ")) / (" + rightS + " ^ 2)";
 
-		else if (current.data == '^'){
-			BinaryTree left = new BinaryTree(current.childL.data, current.childL.childL, current.childL.childR);
-			BinaryTree right = new BinaryTree(current.childR.data, current.childR.childL, current.childR.childR);
-			left.inOrder(null);
-			right.inOrder(null);
-			String leftS = left.infixString;
-			String rightS = right.infixString;
-			return rightS + "* (" + leftS + " ^ (" + rightS + " - 1)) * " + diff(left);
-		}
+		else if (current.data == '^')
+			return rightS + " * (" + leftS + " ^ (" + rightS + " - 1)) * " + diff(left);
+
 		return "";
 	}
 
