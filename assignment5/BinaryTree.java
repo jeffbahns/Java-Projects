@@ -80,12 +80,11 @@ class BinaryTree {
 				if (current.parent.childR.isLeaf())
 					infixString += "(";
 		}
-		infixString += current.data;	
-		if (current.isLeaf() && isChildR(current)){
-			if (current.parent.childL != null){
+		infixString += current.data;
+
+		if (current.isLeaf() && isChildR(current) && current.parent.childL != null){
 				if (current.parent.childL.isLeaf())
 					infixString += ")";
-			}
 		}
 		if (current.childR != null)
 			inOrder(current.childR);
