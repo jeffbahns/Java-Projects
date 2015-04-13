@@ -7,11 +7,11 @@ class MainB {
 		while (!inputExpression.equals(" ")){
 			inputExpression = s.nextLine();
 			BinaryTree tree = binaryInfixTreeBuilder(inputExpression);
-			diff(tree);
+			tree.inOrder(null);
+			System.out.println("DIFFERENTIATION OF " + tree.infixString + ":");
+			System.out.println(diff(tree));
+
 		}
-
-		
-
 	}
 
 	// takes a infix expression string as input
@@ -51,22 +51,17 @@ class MainB {
 	}
 
 	public static String diff(BinaryTree inputTree){
-		inputTree.inOrder(null);
-		System.out.println(inputTree.infixString);
+
+		Node current = inputTree.root;
+
+		if (current.data == ' ')
+			current = current.childL;
+
+		if (current.isLeaf()){
+			return "0";
+		}
 		
-		Node current;
-		Node node = null;
-		if (node == null)
-			node = inputTree.root;
-		current = node;
 
-		if (current.childL != null)
-			inputTree.inOrder(current.childL);
-
-		inputTree.infixString += current.data;	
-
-		if (current.childR != null)
-			inputTree.inOrder(current.childR);
 
 		return "";
 	}
