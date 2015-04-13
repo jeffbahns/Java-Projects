@@ -3,7 +3,8 @@ class BinaryTree {
 	Node root = new Node(null, ' ', null, null);
 	Node focusNode;
 	String infixString = "";
-
+	String infixStringalt = "";
+	
 	public BinaryTree() {
 		root = null;
 	}
@@ -32,6 +33,9 @@ class BinaryTree {
 		focusNode = focusNode.childR;
 	}
 	
+	// ascends to the parent of the focusNode
+	// if it has no parent (it is root), the tree
+	// structure is modified
 	public void ascendParent() {
 		if (focusNode.parent == null){
 			Node newNode = new Node(null, ' ', focusNode, null);
@@ -41,19 +45,28 @@ class BinaryTree {
 		focusNode = focusNode.parent;
 	}
 
+	
 	// sets the current focusNode's data element
 	public void setFocus(char token) {
 		focusNode.data = token;
 	}
 
-	// token is what is stored within the BinaryTree
-	// destination decides where node is going
-	public void addNode(char token) {
-
-		if (focusNode == null)
-			focusNode = root;
+	// checks if a specified node is a left child
+	public boolean isChildL(Node node){
+		if (node.parent != null)
+			return (node == node.parent.childL);
+		return false;
 	}
 
+	// checks if a specified node is a right child
+	public boolean isChildR(Node node){
+		if (node.parent != null)
+			return (node == node.parent.childR);
+		return false;
+	}
+
+	// prints the contents of the tree inorder, 
+	// correctly parenthesized
 	public void inOrder(Node node) {
 		Node current;
 		if (node == null)
@@ -62,8 +75,18 @@ class BinaryTree {
 
 		if (current.childL != null)
 			inOrder(current.childL);
-		infixString += current.data;
 
+		if (current.isLeaf() && isChildL(current) && current.parent.childR != null){
+				if (current.parent.childR.isLeaf())
+					infixString += "(";
+		}
+		infixString += current.data;	
+		if (current.isLeaf() && isChildR(current)){
+			if (current.parent.childL != null){
+				if (current.parent.childL.isLeaf())
+					infixString += ")";
+			}
+		}
 		if (current.childR != null)
 			inOrder(current.childR);
 	}

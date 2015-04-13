@@ -10,5 +10,10 @@ class Node {
 		childL = cL;
 		childR = cR;
 	}
+
+	public boolean isLeaf(){
+		return (data >= '0' && data <= '9');
+	}
+
 	
 }
