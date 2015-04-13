@@ -35,7 +35,7 @@ class MainB {
 					infixTree.descendRight();
 			}
 
-			else if (token >= '0' && token <= '9'){
+			else if (token >= '0' && token <= '9' || Character.isLetter(token)){
 				infixTree.setFocus(token);
 				infixTree.ascendParent();
 			}
@@ -57,9 +57,11 @@ class MainB {
 		if (current.data == ' ')
 			current = current.childL;
 
-		if (current.isLeaf()){
+		
+		if (current.isLeaf() && Character.toLowerCase(current.data) != 'x')
 			return "0";
-		}
+		else if (current.isLeaf() && Character.toLowerCase(current.data) == 'x')
+			return "1";
 		
 
 

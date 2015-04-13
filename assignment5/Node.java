@@ -12,8 +12,7 @@ class Node {
 	}
 
 	public boolean isLeaf(){
-		return (data >= '0' && data <= '9');
+		return (data >= '0' && data <= '9' || Character.isLetter(data));
 	}
-
 	
 }
