@@ -9,8 +9,8 @@ class BinaryTree {
 		root = null;
 	}
 
-	public BinaryTree(char rootItem) {
-		root = new Node(null, rootItem, null, null);
+	public BinaryTree(char rootItem, Node childL, Node childR) {
+		root = new Node(null, rootItem, childL, childR);
 	}
 	
 	// descends into left child of focusNode

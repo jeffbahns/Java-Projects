@@ -18,7 +18,7 @@ class MainB {
 	// returns a binary tree that corresponds to original expression
 	public static BinaryTree binaryInfixTreeBuilder(String infixStr) {
 		
-		BinaryTree infixTree = new BinaryTree(' ');
+		BinaryTree infixTree = new BinaryTree(' ', null, null);
 		for (int i = 0; i < infixStr.length(); i++){
 			char token = infixStr.charAt(i);
 			if (infixTree.focusNode == null)
@@ -57,13 +57,22 @@ class MainB {
 		if (current.data == ' ')
 			current = current.childL;
 
-		
+		// base cases, if root = constant or = 'x'
 		if (current.isLeaf() && Character.toLowerCase(current.data) != 'x')
 			return "0";
+
 		else if (current.isLeaf() && Character.toLowerCase(current.data) == 'x')
 			return "1";
 		
+		// if '+', creates two trees from each of the children
+		// these trees are each differentiated and added together
+		else if (current.data == '+'){
+			BinaryTree left = new BinaryTree(current.childL.data, current.childL.childL, current.childL.childR);
+			BinaryTree right = new BinaryTree(current.childR.data, current.childR.childL, current.childR.childR);
+			return diff(left) + "+" + diff(right);
+		}
 
+		
 
 		return "";
 	}
