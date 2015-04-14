@@ -131,7 +131,7 @@ class StockTrader{
 	}
 
    /* 
-   	*linked list implementation of a deque
+   	* linked list implementation of a deque
    	*
    	* front 		node that is at front of deque
    	* back			node that is at back of deque
