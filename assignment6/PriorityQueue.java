@@ -1,5 +1,6 @@
 /*
 * class PriorityQueue (sorted version)
+*	hybrid singly linked lsit, also
 *
 * min				minimum node, AKA highest priority
 * length			length of priority queue

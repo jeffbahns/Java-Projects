@@ -1,12 +1,13 @@
 /*
 * class Node
-* 		PRIORITY Node implementation
+* 	PRIORITY Node implementation
 *
-* parent			contains the node parent of the node
-* data				contains the char data element of the node
-* childL			contains node child left
-* childR			contains node child right
+* key				integer that carries the key (priority number)
+* job				string that carries name of the job
+* length			integer that carries length of job
+* next				points to next node in chain
 *
+* Node				sole constructor, requires all vars besides "next"
 */
 class Node {
 	int key;
