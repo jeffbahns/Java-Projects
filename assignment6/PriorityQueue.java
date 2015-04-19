@@ -1,20 +1,30 @@
-
+/*
+* class PriorityQueue (sorted version)
+*
+* min				minimum node, AKA highest priority
+* length			length of priority queue
+*
+* PriorityQueue		sole constructor, sets queue to empty/null
+* insert			inserts node in correct order in queue
+* removeMin			removes and returns highest priority node
+* isEmpty			checks if queue is empty
+* increment			increases length by 1
+* decrement			decreases length by 0
+* printStr			prints all the job names on the queue		
+*/
 class PriorityQueue {
 	
 	public Node min;
-	public Node max;
 	public int length = 0;
 
 	public PriorityQueue(){
 		min = null;
-		max = null;
 	}
 
 	public void insert(int key, String job, int length){
 		Node newNode = new Node(key, job, length);
 		if (isEmpty()){
 			min = newNode;
-			max = min;
 		}
 
 		else{
@@ -58,9 +68,7 @@ class PriorityQueue {
 	public void decrement(){
 		length--;
 	}
-
 	
-	// prints out the entirety of the linked list
 	public void printStr(){
 		String output = "";
 		Node current = min;
@@ -70,5 +78,4 @@ class PriorityQueue {
 		}
 		System.out.println(output);
 	}
-
 }

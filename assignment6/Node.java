@@ -1,5 +1,6 @@
 /*
-* PRIORITY Node implementation
+* class Node
+* 		PRIORITY Node implementation
 *
 * parent			contains the node parent of the node
 * data				contains the char data element of the node

@@ -3,8 +3,6 @@ class Assignment6 {
 
 	public static void main(String[]args) {
 		PriorityQueue j = new PriorityQueue();
-		j.insert(5, "Jeff", 3);
-		j.insert(2, "Jeff", 2);
 		
 		jobScheduler(j);
 	}
@@ -12,30 +10,33 @@ class Assignment6 {
 	public static void jobScheduler(PriorityQueue pqueue) {
 		Scanner s = new Scanner(System.in);
 		Node currentJob = null;
-		String input = "";
-		int cycles = 1;
+		String input = " ";
 		while (!input.equals("done")){
-			
+			System.out.println("* - - - - - - - - - - - - - *");
 			if (currentJob == null){
 				currentJob = pqueue.removeMin();
 			}
-			
-			if (currentJob.length == 0){
-				currentJob = null;
+			if (currentJob != null){
+				if (currentJob.length > 0){
+					System.out.println("| RUNNING JOB: " + currentJob.job);
+					currentJob.length--;
+				}
+				if (currentJob.length == 0){
+					currentJob = null;
+				}
 			}
-
-			else if (currentJob.length > 0){
-
-				System.out.println(currentJob.length);
-				currentJob.length--;
-			}
-			else {
-				System.out.println("DOING NOTHING");
-			}
-			
-			System.out.println("CYCLE " + cycles);
+			System.out.print("| ");
 			input = s.nextLine();
-			cycles++;
+			if (!input.equals("")){
+				String[] tokens = input.split(" ");
+				int priority = Integer.parseInt(tokens[8]);
+				String jobName = tokens[2];
+				int length = Integer.parseInt(tokens[5]);
+				pqueue.insert(priority, jobName, length);
+			}
+			if (currentJob == null && pqueue.isEmpty())
+				System.out.println("| Awaiting jobs...");
+			System.out.println("* - - - - - - - - - - - - - *");
 		}
 	}
 
